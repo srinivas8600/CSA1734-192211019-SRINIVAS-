@@ -1,0 +1,12 @@
+list_a=[
+    [3,8,6],
+    [1,7,4],
+    [0,2,5]
+]
+list_b=[i for sublist in list_a for i in sublist]
+list_b.sort()
+list_b.remove(0)
+list_b.append(0)
+for i in range(0,len(list_b),3):
+    list_c=list_b[i:i+3]
+    print(list_c)
