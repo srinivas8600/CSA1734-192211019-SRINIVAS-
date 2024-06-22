@@ -1,0 +1,37 @@
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()  # To keep track of visited nodes
+    queue = deque([start])  # Initialize a queue with the start node
+    bfs_order = []  # List to store the BFS traversal order
+
+    while queue:
+        # Dequeue a node from the front of the queue
+        node = queue.popleft()
+
+        # If the node hasn't been visited yet
+        if node not in visited:
+            # Mark it as visited
+            visited.add(node)
+            # Add it to the BFS order
+            bfs_order.append(node)
+
+            # Add all its neighbors to the queue
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+    
+    return bfs_order
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+start_node = 'A'
+print("BFS Traversal Order:", bfs(graph, start_node))
