@@ -1,0 +1,31 @@
+from itertools import permutations
+
+# Distance matrix (replace with your data)
+distance_matrix = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 15],
+    [20, 25, 15, 0],
+]
+
+def tsp_brute_force(distance_matrix):
+  """
+  Finds the shortest route using brute force.
+  """
+  cities = range(len(distance_matrix))
+  min_distance = float('inf')
+  best_route = None
+  for permutation in permutations(cities):
+    current_distance = 0
+    for i in range(len(permutation) - 1):
+      current_distance += distance_matrix[permutation[i]][permutation[i+1]]
+    current_distance += distance_matrix[permutation[-1]][permutation[0]]  # Return trip
+    if current_distance < min_distance:
+      min_distance = current_distance
+      best_route = permutation
+  return best_route, min_distance
+
+# Example usage
+best_route, min_distance = tsp_brute_force(distance_matrix)
+print("Best Route:", best_route)
+print("Minimum Distance:", min_distance)
